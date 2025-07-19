@@ -1,0 +1,692 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Globridge</title>
+  <link rel="stylesheet" href="globridge.css" />
+  <!-- Latest compiled and minified CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Latest compiled JavaScript -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <link rel="stylesheet" href="globridge.css">
+
+  <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <style>
+    body, html {
+      height: 100%;
+      margin: 0;
+    }
+    .page-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 5px;;
+    }
+
+    .dropdown-menu {
+      background-color: #0e2f44;
+    }
+    .dropdown-menu .dropdown-item {
+      color: #ffffff;
+      transition: background-color 0.3s, color 0.3s;
+    }
+    .dropdown-menu .dropdown-item:hover {
+      background-color: #ffffff;
+      color: #0e2f44;
+    }
+    .hero {
+      background: url(image/social\ media\ 3.jpg) center center/cover no-repeat;
+      position: relative;
+      height: 60vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      color: white;
+    }
+    .overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.5);
+    }
+    .hero-content {
+      position: relative;
+      z-index: 1;
+      max-width: 600px;
+      width: 90%;
+    }
+    .search-bar {
+      background: white;
+      border-radius: 5px;
+      padding: 5px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .search-bar select, .search-bar input {
+      border: none;
+      outline: none;
+      padding: 10px;
+      
+    }
+    .search-bar button {
+      background-color: #0e2f44;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 5px;
+      
+    }
+    .search-bar:hover{
+      color: #0e2f44;
+      border: 1px solid #0e2f44;
+    }
+    
+    .top-links {
+      position: absolute;
+      top: 10px;
+      right: 20px;
+    }
+    .top-links a, .top-links button {
+      margin-left: 10px;
+      color: white;
+      text-decoration: none;
+    }
+    .top-links .btn {
+      padding: 5px 10px;
+    }
+    .form-select{
+      margin-right: auto;
+      margin-left: 0;
+    }
+    .custom-badge {
+    background-color: #0e2f44; 
+    color: white;
+    transition: all 0.3s ease;
+    font-size: 1.1rem;
+    padding: 0.5rem 1rem;
+    }
+    .custom-badge:hover {
+      background-color: white;
+      color: #0e2f44;
+      border: 1px solid #0e2f44;
+    }
+    footer a {
+    color: #0e2f44;
+    text-decoration: none;
+    transition: color 0.3s;
+    }
+    footer a:hover {
+      color: #ff6f00;
+    }
+    footer i {
+      transition: color 0.3s;
+      cursor: pointer;
+    }
+    .btn.btn-warning {
+      background-color: #0e2f44;
+      border: 1px solid #0e2f44;
+      color: #ffffff;
+      transition: all 0.3s;
+    }
+    .btn.btn-warning:hover {
+      background-color: transparent;
+      color: #0e2f44;
+      border: 1px solid #0e2f44;
+    }
+    .social-icons a {
+      color: #0e2f44;
+      font-size: 1.2rem;
+      margin-right: 0.5rem;
+      transition: color 0.3s;
+    }
+    .social-icons a:hover {
+      color: inherit;
+    }
+    .social-icons a.facebook:hover { color: #1877f2; }
+    .social-icons a.instagram:hover { color: #e4405f; }
+    .social-icons a.linkedin:hover { color: #0a66c2; }
+    .social-icons a.whatsapp:hover { color: #25d366; }
+    .social-icons a.comment:hover { color: #0e2f44; }
+    .suppliers-section {
+      padding: 60px 20px;
+      text-align: center;
+      color: #0e2f44;
+      background-color: white;
+      font-family: 'Segoe UI', sans-serif;
+    }
+
+    .cards-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 30px;
+      margin: 40px 0;
+    }
+
+    .card {
+      width: 220px;
+      height: 200px;
+      perspective: 1000px;
+    }
+
+    .card-inner {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      transition: transform 0.8s;
+      transform-style: preserve-3d;
+    }
+
+    .card:hover .card-inner {
+      transform: rotateY(180deg);
+    }
+
+    .card-front, .card-back {
+      color: #0e2f44;
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      border-radius: 12px;
+      box-shadow: 0 8px 16px rgba(0,0,0,0.4);
+      backface-visibility: hidden;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+      background: white;
+      text-align: center;
+    }
+
+    .card-back {
+      transform: rotateY(180deg);
+      background: #e2e2e2;
+    }
+
+    .buttons button {
+      padding: 12px 20px;
+      margin: 10px;
+      font-size: 16px;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    button.primary {
+      background-color: #0e2f44;
+      color: white;
+      border: none;
+    }
+
+    button.primary:hover {
+      transform: scale(1.05);
+      background-color: #e2e2e2;
+    }
+
+    button.outline {
+      background-color: transparent;
+      border: 1px solid #0e2f44;
+      color: #0e2f44;
+    }
+
+    button.outline:hover {
+      transform: scale(1.05);
+      background-color: rgba(255,255,255,0.1);
+    } 
+    .scroll-to-top {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      background-color: #0e2f44;
+      color: white;
+      padding: 12px 14px;
+      border-radius: 50%;
+      font-size: 20px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+      cursor: pointer;
+      transition: background-color 0.3s, transform 0.3s;
+      z-index: 1000;
+      text-decoration: none;
+    }
+
+    .scroll-to-top:hover {
+      background-color: #133f63;
+      transform: scale(1.1);
+    } 
+    .video-section {
+
+      color: #0e2f44;
+      padding: 80px 20px;
+      text-align: center;
+      font-family: 'Segoe UI', sans-serif;
+    }
+
+    .video-wrapper h2 {
+      font-size: 32px;
+      margin-bottom: 30px;
+    }
+
+    .video-container {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+    }
+
+    .video-container video {
+      width: 100%;
+      max-width: 900px;
+      height: auto;
+      border-radius: 12px;
+      box-shadow: 0 8px 16px rgba(0,0,0,0.4);
+    }
+    .video-container iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+    .fixed-button {
+      position: fixed;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 48px;
+      height: 160px;
+      background-color: #0e2f44;
+      border: 2px solid white;
+      color: white;
+      font-size: 18px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      font-weight: bold;
+      writing-mode: vertical-rl;
+      text-orientation: mixed;
+      border-radius: 30px;
+      text-decoration: none;
+      z-index: 999;
+      transition: all 0.3s ease;
+      opacity: 0;
+      animation: slideIn 0.8s ease-out forwards;
+    }
+    .fixed-button:hover {
+      background-color: white;
+      color: #0e2f44;
+    }
+
+    .right-button {
+      right: 20px;
+      animation-delay: 0.4s;
+    }
+    .left-button {
+      left: 20px;
+      animation-delay: 0.6s;
+    }
+
+    /* animation */
+    @keyframes slideIn {
+      from {
+        transform: translateY(-50%) translateX(50px);
+        opacity: 0;
+      }
+      to {
+        transform: translateY(-50%) translateX(0);
+        opacity: 1;
+      }
+    }
+                
+  </style>
+</head>
+<body>
+
+<!-- navbar-->
+ <div class="container">
+<nav class=" page-container position-absolute top-0 start-0 p-2 d-none d-md-block " style="z-index: 10;">
+  <ul class="nav">
+    <li class="nav-item dropdown">
+      <a href="#" class="nav-link text-white dropdown-toggle" data-bs-toggle="dropdown">For Buyers</a>
+      <ul class="dropdown-menu">
+        <li><a class="dropdown-item" href="Supplier Discovery.html">Supplier Discovery</a></li>
+        <li><a class="dropdown-item" href="Instant Quote.html">Instant Quote</a></li>
+        <li><a class="dropdown-item" href="Product Catalogs.html">Product Catalogs</a></li>
+        <li><a class="dropdown-item" href="CAD Models.html">CAD Models</a></li>
+      </ul>
+    </li>
+    <li class="nav-item dropdown">
+      <a href="#" class="nav-link text-white dropdown-toggle" data-bs-toggle="dropdown">For Suppliers</a>
+      <ul class="dropdown-menu">
+        <li><a class="dropdown-item" href="Claim Your Company.html">Claim Your Company</a></li>
+        <li><a class="dropdown-item" href="Advertise.html">Advertise</a></li>
+        <li><a class="dropdown-item" href="Marketing Service.html">Marketing Service</a></li>
+        <li><a class="dropdown-item" href="Resources.html">Resources</a></li>
+        <li><a class="dropdown-item" href="Digital Health Check.html">Digital Health Check</a></li>
+        <li><a class="dropdown-item" href="Buyer Intent Report.html">Buyer Intent Report</a></li>
+        <li><a class="dropdown-item" href="Contact.html">Contact</a></li>
+      </ul>
+    </li>
+    <li class="nav-item dropdown">
+      <a href="#" class="nav-link text-white dropdown-toggle" data-bs-toggle="dropdown">Industry Insights</a>
+      <ul class="dropdown-menu">
+        <li><a class="dropdown-item" href="Industry News.html">Industry News</a></li>
+        <li><a class="dropdown-item" href="Technical Guides.html">Technical Guides </a></li>
+        <li><a class="dropdown-item" href="Industry Videos.html">Industry Videos</a></li>
+      </ul>
+    </li>
+    <li class="nav-item dropdown">
+      <a href="#" class="nav-link text-white dropdown-toggle" data-bs-toggle="dropdown">About</a>
+      <ul class="dropdown-menu">
+        <li><a class="dropdown-item" href="About Us.html">About Us</a></li>
+        <li><a class="dropdown-item" href="Careers.html">Careers</a></li>
+        <li><a class="dropdown-item" href="https://globaltradedata.wto.org/" target="_blank">Press Room</a></li>
+        <li><a class="dropdown-item" href="Help Center.html">Help Center</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+</div>
+  <div class="hero">
+    <div class="overlay"></div>
+    <div class="top-links d-none d-md-block">
+      <a href="#">Claim Your Company</a>
+      <a href="#">Start Advertising</a>
+      <button class="btn btn-outline-light btn-sm">Login</button>
+      <button class="btn btn-outline-light btn-sm">Register</button>
+    </div>
+    <div class="hero-content">
+      <img src="image/WHIGHT LOGO.png" alt="Logo" class="mb-3" style="max-width: 250px;">
+      <h2>Global sourcing made easy</h2>
+      <br>
+      <div class="search-bar mt-3">
+        <select class="form-select w-auto">
+          <option>All</option>
+          <option>Suppliers</option>
+          <option>Products</option>
+          <option>CAD Model</option>
+          <option>Diverse Suppliers</option>
+          <option>Insights</option>
+
+        </select>
+        <input type="text" class="form-control w-50" placeholder="By Category, Company or Brand">
+        <button class="btn">Search</button>
+      </div>
+      <p class="mt-2">New to Globridge <a href="#" class="text-info">Join Free for Full Access →</a></p>
+    </div>
+  </div>
+  <br>
+<h2 class="text-center my-4" style="color: #0e2f44;">Find what's right for you</h2>
+<!-- Section 1 -->
+<!-- SECTION: For Buyers -->
+<section class="container py-5 d-flex flex-column flex-md-row align-items-center justify-content-between">
+  <!-- text -->
+  <div class="col-md-6 mb-4 mb-md-0">
+    <span class="badge rounded-pill mb-3 custom-badge">For Buyers</span>
+    <h3 style="color: #0e2f44; " >Connect with our network of trusted Suppliers in just a few clicks.</h3>
+    <ul class="list-unstyled mt-3" style="color: #0e2f44; " >
+      <li>• Find the Best Solution for You</li>
+      <li>• Filter by Distance, Certifications, and More</li>
+      <li>• Evaluate Supplier Capabilities and Services</li>
+      <li>• Get Direct Quotes</li>
+      <li>• Source Parts and Services Today</li>
+    </ul>
+    <button class="btn btn-primary mt-3">Search for a Supplier</button>
+  </div>
+
+  <!-- image -->
+  <div class="col-md-5 text-center">
+     <img src="image/social media 2 .jpg" alt="For Buyer" class="img-fluid rounded shadow" style="max-height: 400px; max-width: 100%; height: auto;">
+  </div>
+</section>
+<br>
+<!-- Section 2 -->
+<!-- SECTION: For Supplier -->
+<section class="container py-5 d-flex flex-column flex-md-row align-items-center justify-content-between">
+  <!-- image -->
+  <div class="col-md-5 text-center d-flex justify-content-center align-items-center mb-4 mb-md-0">
+    <img src="image/for supplier.jpg" alt="For Supplier" class="img-fluid rounded shadow" style="max-width: 100%; height: auto;">
+  </div>
+
+  <!-- text -->
+  <div class="col-md-6">
+    <span class="badge rounded-pill mb-3 custom-badge">For Suppliers</span>
+    <h3 style="color: #0e2f44; ">Generate leads for your business by advertising on Thomas.</h3>
+    <ul class="list-unstyled mt-3"  style="color: #0e2f44; ">
+      <li>• Join a Trusted Network</li>
+      <li>• Customize Your Ad Budget</li>
+      <li>• Optimize with Targeted Keywords</li>
+      <li>• Tailor Your Budget for Precision</li>
+      <li>• Analyze Your Program Results</li>
+    </ul>
+    <button class="btn btn-primary mt-3">Start Advertising</button>
+  </div>
+</section>
+<br>
+<br>
+<!-- Section 3 -->
+<section class="py-5 position-relative overflow-hidden bg-transparent">
+  <div class="container position-relative">
+    <div class="bg" style="background-color: #0e2f44; width: 100%; height: 500px; position: absolute; top: 50%; left: 0; transform: translateY(-50%); z-index: 1; border-radius: 30px;"></div>
+    <div class="row g-0 align-items-center position-relative text-center" style="z-index: 2;">
+
+      <!-- LEFT COLUMN -->
+      <div class="col-md-6 d-flex flex-column align-items-center">
+        <img src="image/OUR COMPANY.jpg" alt="Why Choose Us Image 2" class="img-fluid rounded-4 shadow-lg mb-3" style="width: 320px; height: auto; object-fit: contain; margin-top: -40px; box-shadow: 0 15px 30px rgba(0,0,0,0.5);">
+        <p class="text-light fs-5 px-3">
+          We're more than an import-export company. We're the bridge between your first idea and global success. With every shipment, we connect markets, unlock opportunities, and deliver with security, speed, and a smile. We believe trade isn't just about moving goods—it's about building relationships, earning trust, and making dreams come true.
+        </p>
+      </div>
+
+      <!-- RIGHT COLUMN -->
+      <div class="col-md-6 d-flex flex-column align-items-center">
+        <h3 class="text-white fw-bold mb-5 fs-1">Why Choose Us?</h3>
+        <img src="image/OUR EMPLOYEE.png" alt="Why Choose Us Image 1" class="img-fluid rounded-4 shadow-lg mt-3" style="width: 320px; height: auto; object-fit: contain; margin-bottom: -100px; box-shadow: 0 15px 30px rgba(0,0,0,0.5);">
+      </div>
+
+    </div>
+  </div>
+</section>
+<br>
+<br>
+<!-- Section 4 -->
+<section class="video-section">
+  <div class="video-wrapper">
+    <h2>Globridge: Where Distance Disappears</h2>
+
+    <div class="video-container">
+      <video controls>
+        <source src="image/video.mp4" type="video/mp4">
+      </video>
+    </div>
+  </div>
+</section>
+<br>
+<br>
+<!-- Section 5 -->
+<section class="suppliers-section" >
+  <h2>Find Suppliers, Insights, Tools and More...</h2>
+  <p>Become part of North America's largest and most active network of B2B buyers and industrial/commercial suppliers.</p>
+
+  <div class="cards-container">
+    <!-- Card 1 -->
+    <div class="card">
+      <div class="card-inner">
+        <div class="card-front">
+          <i class="fas fa-industry fa-3x mb-3"></i>
+          <p>Select From Over 500,000<br>Industrial Suppliers</p>
+        </div>
+        <div class="card-back">
+          <p>Connect with verified suppliers and streamline your sourcing process.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card 2 -->
+    <div class="card">
+      <div class="card-inner">
+        <div class="card-front">
+          <i class="fas fa-newspaper fa-3x mb-3"></i>
+          <p>Receive Daily<br>Industry Updates</p>
+        </div>
+        <div class="card-back">
+          <p>Stay informed with the latest trends, news, and innovations in your field.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card 3 -->
+    <div class="card">
+      <div class="card-inner">
+        <div class="card-front">
+          <i class="fas fa-search fa-3x mb-3"></i>
+          <p>Search Over<br>6 Million Products</p>
+        </div>
+        <div class="card-back">
+          <p>Find exactly what you need with advanced filtering and product comparisons.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card 4 -->
+    <div class="card">
+      <div class="card-inner">
+        <div class="card-front">
+          <i class="fas fa-cube fa-3x mb-3"></i>
+          <p>Download 2D & 3D<br>CAD Models</p>
+        </div>
+        <div class="card-back">
+          <p>Access detailed CAD files to accelerate your design and engineering workflow.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="buttons">
+    <button class="primary">Start Sourcing Suppliers</button>
+    <button class="outline">Claim Your Company Profile →</button>
+  </div>
+</section>
+<br>
+<br>
+<p class="text-center my-4" style="color: #0e2f44;">Join Workd's Top Companies Actively Searching on Globridge.com.</p>
+<br>
+<br>
+<!-- Section 6 -->
+<section class="container py-5 text-center">
+  <div class="row justify-content-center align-items-center mb-4">
+    <div class="col-6 col-md-2">
+      <div class="rounded-circle bg-light d-flex justify-content-center align-items-center mx-auto" style="width:120px; height:120px; overflow:hidden;">
+        <img src="image/Maersk.png" alt="Company 1" class="img-fluid" style="max-width:80px; height:auto;">
+      </div>
+      <p style="color:#0e2f44;">MAERSK</p>
+    </div>
+    <div class="col-6 col-md-2">
+      <div class="rounded-circle bg-light d-flex justify-content-center align-items-center mx-auto" style="width:120px; height:120px; overflow:hidden;">
+        <img src="image/Cargill.png" alt="Company 2" class="img-fluid" style="max-width:80px; height:auto;">
+      </div>
+      <p style="color:#0e2f44;">CARGILL</p>
+    </div>
+    <div class="col-6 col-md-2">
+      <div class="rounded-circle bg-light d-flex justify-content-center align-items-center mx-auto" style="width:120px; height:120px; overflow:hidden;">
+        <img src="image/Li & Fung.png" alt="Company 3" class="img-fluid" style="max-width:80px; height:auto;">
+      </div>
+      <p style="color:#0e2f44;">LI & FUNG</p>
+    </div>
+    <div class="col-6 col-md-2">
+      <div class="rounded-circle bg-light d-flex justify-content-center align-items-center mx-auto" style="width:120px; height:120px; overflow:hidden;">
+        <img src="image/MSC.jpg" alt="Company 4" class="img-fluid" style="max-width:80px; height:auto;">
+      </div>
+      <p style="color:#0e2f44;">MSC</p>
+    </div>
+    <div class="col-6 col-md-2">
+      <div class="rounded-circle bg-light d-flex justify-content-center align-items-center mx-auto" style="width:120px; height:120px; overflow:hidden;">
+        <img src="image/DP_World.png" alt="Company 5" class="img-fluid" style="max-width:80px; height:auto;">
+      </div>
+      <p style="color:#0e2f44;">DP WORLD</p>
+    </div>
+    <div class="col-6 col-md-2">
+      <div class="rounded-circle bg-light d-flex justify-content-center align-items-center mx-auto" style="width:120px; height:120px; overflow:hidden;">
+        <img src="image/Amazon.png" alt="Company 6" class="img-fluid" style="max-width:80px; height:auto;">
+      </div>
+      <p style="color:#0e2f44;">AMAZON</p>
+    </div>
+  </div>
+  <br>
+  <button class="btn btn-outline-primary" style="--bs-btn-color:#0e2f44; --bs-btn-border-color:#0e2f44; --bs-btn-hover-bg:#0d3559; --bs-btn-hover-border-color:#0d3559;">Claim Your Company Profile →</button>
+</section>
+<br>
+<!-- Footer Section -->
+<footer class="py-5 bg-light">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-3">
+        <img src="image/logo.png" alt="Logo" class="mb-2" style="max-width: 150px; margin-top: -20px;">
+        <p class="small text-muted">Four Globridge established on 2025 by Shimaa Ahmed It is a professional trading company providing export and import services in a wide range of indus.</p>
+        <p class="small text-muted">Let us assist you in finding the best solution for your business round the clock.</p>
+      </div>
+      <div class="col-md-2">
+        <h6 class="fw-bold" style="color: #0e2f44;">For Buyers</h6>
+        <ul class="list-unstyled small" style="color: #0e2f44;">
+          <li><a href="Supplier Discovery.html">Supplier Discovery</a></li>
+          <li><a href="Instant Quote.html">Instant Quote</a></li>
+          <li><a href="Product Catalogs.html">Product Catalogs</a></li>
+          <li><a href="CAD Models.html">CAD Models</a></li>
+        </ul>
+      </div>
+      <div class="col-md-2">
+        <h6 class="fw-bold" style="color: #0e2f44;">For Suppliers</h6>
+        <ul class="list-unstyled small">
+        <li><a href="Claim Your Company.html">Claim Your Company</a></li>
+        <li><a href="Advertise.html">Advertise</a></li>
+        <li><a href="Marketing Service.html">Marketing Service</a></li>
+        <li><a href="Resources.html">Resources</a></li>
+        <li><a href="Digital Health Check.html">Digital Health Check</a></li>
+        <li><a href="buyer.jpg">Buyer Intent Report</a></li>
+        <li><a href="Contact.html">Contact</a></li>
+        </ul>
+      </div>
+      <div class="col-md-2">
+        <h6 class="fw-bold" style="color: #0e2f44;">Industry Insights</h6>
+        <ul class="list-unstyled small">
+        <li><a href="Industry News.html">Industry News</a></li>
+        <li><a href="Technical Guides.html">Technical Guides </a></li>
+        <li><a href="Industry Videos.html">Industry Videos</a></li>
+        </ul>
+      </div>
+      <div class="col-md-3">
+        <h6 class="fw-bold" style="color: #0e2f44;">Contact Us</h6>
+        <p class="small text-muted mb-1" >+1-123-456-7890 (International)</p>
+        <p class="small text-muted mb-1">+1-000-111-2222 (Egypt)</p>
+        <p class="small text-muted mb-2">contactus@globridge.com</p>
+        <button class="btn btn-warning btn-sm mb-3">Contact Us</button> 
+        <div class="social-icons">
+          <span class="me-2" style="color: #0e2f44;">Follow Us</span>
+          <a href="https://www.facebook.com/" target="_blank" class="facebook"><i class="fab fa-facebook-f"></i></a>
+          <a href="https://www.instagram.com/" target="_blank" class="instagram"><i class="fab fa-instagram"></i></a>
+          <a href="https://www.linkedin.com/in/shaymaa-ahmed-0260a1231?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app/" target="_blank" class="linkedin"><i class="fab fa-linkedin-in"></i></a>
+          <a href="https://https://wa.me/qr/76JXQ7VBTMAMD1/" target="_blank" class="whatsapp"><i class="fab fa-whatsapp"></i></a>
+          <a href="https://https://wa.me/qr/76JXQ7VBTMAMD1/" target="_blank" class="comment"><i class="fas fa-comment"></i></a>
+        </div>        
+      </div>
+    </div>
+  </div>
+</footer>
+<!-- SCROLL BUTTON -->
+<a href="#" class="scroll-to-top">
+  <i class="fas fa-chevron-up"></i>
+</a>
+<!-- CONTACT BUTTON -->
+<a href="Contact.html" class="fixed-button right-button">Contact Us</a>
+
+<!-- HOME BUTTON -->
+<a href="globridge.com-1.html" class="fixed-button left-button">Home</a>
+
+<script src="globridge.js"></script>
+</body>
+</html>
